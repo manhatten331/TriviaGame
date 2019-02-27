@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <h1>Trivia Game: How North Carolinian are ya?</h1>
+
+        <span class="timer-text">
+            <h2>Time Remaining: </h2>
+        </span>
+
+
+        <h3>Which one of these chains was founded in North Carolina?</h3>
+        <form>
+            <input type="radio" name="questions" value="Dunkin Doughnuts">Dunkin Doughnuts
+            <input type="radio" name="questions" value="Cold Stone">Cold Stone
+            <input type="radio" name="questions" value="Kripsy Kreme">Kripsy Kreme
+            <input type="radio" name="questions" value="Smoothie King">Smoothie King
+        </form>
+        <!-- Dunkin Doughnuts, Cold Stone, Kripsy Kreme (Correct) or Smoothie King -->
+
+        <h3>What soda brand was invented in North Carolina</h3>
+        <form>
+            <input type="radio" name="questions" value="Pepsi">Pepsi
+            <input type="radio" name="questions" value="Coca Cola">Coca Cola
+            <input type="radio" name="questions" value="Moutain Dew">Moutain Dew
+            <input type="radio" name="questions" value="Mellow Yellow">Mellow Yellow
+        </form>
+        <!-- Pepsi (Correct), Coca Cola, Moutain Dew, Mellow Yellow -->
+        <h3>What plant is native to the State?</h3>
+        <form>
+            <input type="radio" name="questions" value="Hammer Orchid">Hammer Orchid
+            <input type="radio" name="questions" value="Dragon Arum">Dragon Arum
+            <input type="radio" name="questions" value="Kings Holly">Kings Holly
+            <input type="radio" name="questions" value="Venus Fly Trap">Venus Fly Trap
+        </form>
+        <!-- Hammer Orchid, Dragon Arum, Kings Holly, Venus Fly Trap (Correct) -->
+        <h3>What is the name of the first established colony?</h3>
+        <form>
+            <input type="radio" name="questions" value="Charlotte">Charlotte
+            <input type="radio" name="questions" value="Plymouth">Plymouth
+            <input type="radio" name="questions" value="Roanoke">Roanoke
+            <input type="radio" name="questions" value="Jamestown">Jamestown
+        </form>
+        <!-- Charlotte, Plymouth, Roanoke (Correct), Jamestown -->
+        <h3>What does our state motto stand for: Esse quam videri?</h3>
+        <form>
+            <input type="radio" name="questions" value="We're the GOAT!">We're the GOAT!
+            <input type="radio" name="questions" value="The west coast is lame">The west coast is lame
+            <input type="radio" name="questions" value="Bequeathe thy knowledge">Bequeathe thy knowledge
+            <input type="radio" name="questions" value="To be rather than to seem">To be rather than to seem
+        </form>
+        <!-- We're the GOAT!, The west coast is lame, Bequeathe thy knowledge, To be rather than to seem (Correct) -->
+    </div>
+
+    <div class="results"></div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        var correct = ["Kripsy Kreme", "Pepsi", "Venus Fly Trap", "Roanoke", "To be rather than to seem"];
+
+        var incorrect = ["Dunkin Doughnuts", "Cold Stone", "Smoothie King", "Coca Cola", "Moutain Dew", "Mellow Yellow", "Hammer Orchid",
+            "Dragon Arum", "Kings Holly", "Charlotte", "Plymouth", "Jamestown", "We're the GOAT!", "The west coast is lame", "Bequeathe thy knowledge"]
+
+        var numCorrect = 0;
+        var numIncorrect = 0;
+
+        var timer = 30;
+
+        var intervalId;
+
+        $(document).ready(function () {
+
+        function startTime() {
+
+            intervalId = setInterval(decreaseTime, 1000)
+
+        }
+
+        function decreaseTime() {
+
+            timer--;
+
+            $(".timer-text").html("<h2> Time Remaining: " + timer + "</h2>");
+
+            if (timer === 0) {
+
+                stopTime();
+                grading();
+            }
+        }
+
+        function stopTime() {
+
+            $(".main-container").empty();
+            grading();
+            $(".results").html("<h1> Your number correct is: " + numCorrect + "</h1>")
+            $(".results").html("<h1> Your number incorrect is: " + numIncorrect + "</h1>")
+        }
+
+        function grading() {
+            // steps to grade properly
+
+            // 1. use all forms on page, not just first
+            // for (var i = 0; i < forms[i].length; i++) {
+            //     var grade = document.forms[0];
+            // }
+            // loop through forms to get each questions (each question is a form)
+            // for (var s = 0; s < input.length; i++) {
+            //     if (input.val() === correct.length) {
+            //         numCorrect++;
+            //     } else if (input.val() === incorrect)
+                
+            //     ) {
+            //         numIncorrect++;
+            //     }
+            //     $(".main-container").html("<h1> Your number correct is: " + numCorrect + "</h1>")
+            //     $(".main-container").html("<h1> Your number incorrect is: " + numIncorrect + "</h1>")
+            // }
+            // loop through each choice of each question, comparing selected answer to correct answer
+            // store results in a variable
+            // calculate score
+            // var grade = document.forms[0];
+
+
+
+            for (var i = 0; i < grade.length; i++) {
+
+                if (grade[i].checked === correct[i]) {
+
+                    numCorrect++;
+
+                } else if (grade[i].checked === incorrect[i]) {
+
+                    numIncorrect++;
+
+                }
+                $(".main-container").html("<h1> Your number correct is: " + numCorrect + "</h1>")
+                $(".main-container").html("<h1> Your number incorrect is: " + numIncorrect + "</h1>")
+            }
+        }
+
+        startTime();
+        });
+
+
+    </script>
+</body>
+
+</html>
